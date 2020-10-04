@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Asset Management Solution</title>
+    @Styles.Render("~/LoginContent/css")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body class="login-page" style="min-height: 512.391px;">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="../../index2.html"><b>Asset Management & Tracking Solution</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" id="emailAddress" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" id="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button id="loginButton" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+
+                <p class="mb-1">
+                    <a>If signin problem contact your administrator</a>
+                </p>
+
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>x
+    <!-- /.login-box -->
+    <!-- jQuery -->
+    @Scripts.Render("~/bundles/jquery");
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+     <script>
+         $(document).ready(function () {
+             $('#loginButton').unbind().click(function () {
+                 $('form').submit(function (e) {
+                     e.preventDefault();
+
+                     var data = { username: $('#emailAddress').val(), password: $('#password').val()}
+                     $.ajax({
+                         // edit to add steve's suggestion.
+                         //url: "/ControllerName/ActionName",
+                         type: 'POST',
+                         data: data,
+                         url: 'http://localhost:50658/Login/Login',
+                         success: function (data) {
+
+                             window.location.href = "/Home/Index";
+
+                         }
+                     });
+                 });
+             });
+         });
+     </script>
+
+    
+</body>
+</html>
+

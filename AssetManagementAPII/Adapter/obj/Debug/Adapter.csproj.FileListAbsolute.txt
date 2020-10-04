@@ -1,0 +1,9 @@
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\bin\Debug\Adapter.dll
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\bin\Debug\Adapter.pdb
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\bin\Debug\SharedModel.dll
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\bin\Debug\SharedModel.pdb
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\obj\Debug\Adapter.csprojAssemblyReference.cache
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\obj\Debug\Adapter.csproj.CoreCompileInputs.cache
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\obj\Debug\Adapter.csproj.CopyComplete
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\obj\Debug\Adapter.dll
+C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Adapter\obj\Debug\Adapter.pdb

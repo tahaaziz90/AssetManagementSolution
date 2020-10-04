@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "Validate";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Location</label>
+                <select class="form-control">
+                    <option>L1</option>
+                    <option>option 2</option>
+                    <option>option 3</option>
+                    <option>option 4</option>
+                    <option>option 5</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2"><h4><br />Status Summary</h4></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-1"><br />
+        <a class="btn btn-app">
+            <i class="fa fa-search" aria-hidden="true"></i> Search</a>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h1>0</h1>
+
+                        <p>Total Assets for Validate</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <div class="form-control">
+                <h4>Assets to be Disposed</h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Asset Depriciated</th>
+
+                        <th>Purchase Price</th>
+
+                        <th>Date of Purchase</th>
+
+                        <th>Netbook Value</th>
+
+                        <th>BarcodeID</th>
+
+                        <th>Discription</th>
+
+                        <th>Group</th>
+
+                        <th>Category</th>
+
+                        <th>Section</th>
+
+                        <th>Current Room</th>
+
+                        <th>Image</th>
+
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10%</td>
+                        <td>$500</td>
+                        <td>2020/09/03</td>
+                        <td>$450</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>10%</td>
+                        <td>$500</td>
+                        <td>2020/09/03</td>
+                        <td>$450</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>10%</td>
+                        <td>$500</td>
+                        <td>2020/09/03</td>
+                        <td>$450</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>10%</td>
+                        <td>$500</td>
+                        <td>2020/09/03</td>
+                        <td>$450</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>10%</td>
+                        <td>$500</td>
+                        <td>2020/09/03</td>
+                        <td>$450</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>10%</td>
+                        <td>$500</td>
+                        <td>2020/09/03</td>
+                        <td>$450</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>Date of Validation</label>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        @*<span class="input-group-text">
+                                <i class="far fa-calendar-alt" id="datepicker"></i>
+                            </span>*@
+                    </div>
+                    <input type="date" class="form-control float-right" id="datepicker">
+                </div>
+                <!-- /.input group -->
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Remarks</label>
+                <input type="text" class="form-control" id="remarks" placeholder="Enter Remarks">
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-block btn-success">Okay</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-block btn-danger">Decline</button>
+        </div>
+    </div>
+
+    <script>
+            $( function() {
+                $("#datepicker").datepicker();
+            } );
+    </script>
+
+</section>

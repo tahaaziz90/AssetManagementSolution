@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewBag.Title = "AssetReverificationStatus";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+
+<section>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Select Location</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selectLocation`">
+                    <option value="value">Location</option>
+                    <option value="value">Location2</option>
+                    <option value="value">Location3</option>
+                    <option value="value">Location4</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Reverification Date</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selectrDate">
+                    <option value="value">All</option>
+                    <option value="value">Date1</option>
+                    <option value="value">Date2</option>
+                    <option value="value">Date3</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Reverification Status</label>
+                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selectrStatus">
+                    <option value="value">All</option>
+                    <option value="value">Status1</option>
+                    <option value="value">Status2</option>
+                    <option value="value">Status3</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <br /><h4 class="glyphicon-text-color">Asset Reverification Status</h4>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <div class="col-md-2">
+                    <br />
+                    <a class="btn btn-app">
+                        <i class="fas fa-search"></i>Search
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h1>0</h1>
+                        <p>Total Assets</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</section>
+<section>
+    <div class="card">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="form-group">
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Verification Status</th>
+                                <th>Date of Verification</th>
+                                <th>BarcodeID</th>
+                                <th>Asset Description</th>
+                                <th>Asset Group</th>
+                                <th>Asset Category</th>
+                                <th>Section Name</th>
+                                <th>Room No</th>
+                                <th>Room Type</th>
+                                <th>Floor</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Ok</td>
+                                <td>2011/04/25</td>
+                                <td>125228</td>
+                                <td>Chair</td>
+                                <td>Office Furinture</td>
+                                <td>FF</td>
+                                <td>Vip Room</td>
+                                <td>101</td>
+                                <td>King</td>
+                                <td>2</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+</script>
+

@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AssetManagementModelStoreContainer" CdmEntityContainer="AssetManagementEntities">
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="AssetManagementModel.Asset">
+        <MappingFragment StoreEntitySet="Asset">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+          <ScalarProperty Name="Category_Code" ColumnName="Category_Code" />
+          <ScalarProperty Name="Purchase_ID" ColumnName="Purchase_ID" />
+          <ScalarProperty Name="Asset_Number" ColumnName="Asset_Number" />
+          <ScalarProperty Name="RFID_Tag" ColumnName="RFID_Tag" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetDisposals">
+      <EntityTypeMapping TypeName="AssetManagementModel.AssetDisposal">
+        <MappingFragment StoreEntitySet="AssetDisposal">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Asset_ID" ColumnName="Asset_ID" />
+          <ScalarProperty Name="Disposal_ID" ColumnName="Disposal_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="AssetManagementModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Category_Code" ColumnName="Category_Code" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+          <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+          <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="AssetManagementModel.Currency">
+        <MappingFragment StoreEntitySet="Currency">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+          <ScalarProperty Name="Currency_Code" ColumnName="Currency_Code" />
+          <ScalarProperty Name="Currency_Symbol" ColumnName="Currency_Symbol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Disposals">
+      <EntityTypeMapping TypeName="AssetManagementModel.Disposal">
+        <MappingFragment StoreEntitySet="Disposal">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Disposal_Number" ColumnName="Disposal_Number" />
+          <ScalarProperty Name="DateOfDisposal" ColumnName="DateOfDisposal" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DisposedOn" ColumnName="DisposedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisposalDetails">
+      <EntityTypeMapping TypeName="AssetManagementModel.DisposalDetail">
+        <MappingFragment StoreEntitySet="DisposalDetail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Disposal_ID" ColumnName="Disposal_ID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="AssetManagementModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+          <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+          <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movements">
+      <EntityTypeMapping TypeName="AssetManagementModel.Movement">
+        <MappingFragment StoreEntitySet="Movement">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Asset_ID" ColumnName="Asset_ID" />
+          <ScalarProperty Name="Previous_Location" ColumnName="Previous_Location" />
+          <ScalarProperty Name="New_Location" ColumnName="New_Location" />
+          <ScalarProperty Name="Movement_On" ColumnName="Movement_On" />
+          <ScalarProperty Name="Movement_By" ColumnName="Movement_By" />
+          <ScalarProperty Name="Movement_From" ColumnName="Movement_From" />
+          <ScalarProperty Name="Movement_To" ColumnName="Movement_To" />
+          <ScalarProperty Name="Movement_Reason" ColumnName="Movement_Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="AssetManagementModel.Permission">
+        <MappingFragment StoreEntitySet="Permission">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Permission_Name" ColumnName="Permission_Name" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="AssetManagementModel.Purchase">
+        <MappingFragment StoreEntitySet="Purchases">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Currency_ID" ColumnName="Currency_ID" />
+          <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+          <ScalarProperty Name="PO_Number" ColumnName="PO_Number" />
+          <ScalarProperty Name="Invoice_Number" ColumnName="Invoice_Number" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Freight" ColumnName="Freight" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Discount_Percent" ColumnName="Discount_Percent" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PO_Date" ColumnName="PO_Date" />
+          <ScalarProperty Name="Ship_Date" ColumnName="Ship_Date" />
+          <ScalarProperty Name="Received_On" ColumnName="Received_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="AssetManagementModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolePermissions">
+      <EntityTypeMapping TypeName="AssetManagementModel.RolePermission">
+        <MappingFragment StoreEntitySet="RolePermission">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Permission_ID" ColumnName="Permission_ID" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="AssetManagementModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Supplier_Name" ColumnName="Supplier_Name" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AssetManagementModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AssetManagementModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+          <ScalarProperty Name="Pin" ColumnName="Pin" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="AssetManagementModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+          <ScalarProperty Name="Created_On" ColumnName="Created_On" />
+          <ScalarProperty Name="Modified_On" ColumnName="Modified_On" />
+          <ScalarProperty Name="Deleted_On" ColumnName="Deleted_On" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="asm_getCategory" FunctionName="AssetManagementModel.Store.asm_getCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getCategory_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getLocations" FunctionName="AssetManagementModel.Store.asm_getLocations">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getLocations_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getAsset" FunctionName="AssetManagementModel.Store.getAsset">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.getAsset_Result">
+          <ScalarProperty Name="Asset_Number" ColumnName="Asset_Number" />
+          <ScalarProperty Name="Category_Code" ColumnName="Category_Code" />
+          <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="AssetManagementModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="AssetManagementModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="AssetManagementModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="AssetManagementModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="AssetManagementModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="AssetManagementModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="AssetManagementModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="spCategory" FunctionName="AssetManagementModel.Store.spCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.spCategory_Result">
+          <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+          <ScalarProperty Name="Category_Code" ColumnName="Category_Code" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="UserAuthentication" FunctionName="AssetManagementModel.Store.UserAuthentication" />
+    <FunctionImportMapping FunctionImportName="asm_addLocation" FunctionName="AssetManagementModel.Store.asm_addLocation" />
+    <FunctionImportMapping FunctionImportName="asm_addAsset" FunctionName="AssetManagementModel.Store.asm_addAsset" />
+    <FunctionImportMapping FunctionImportName="asm_addCategory" FunctionName="AssetManagementModel.Store.asm_addCategory" />
+    <FunctionImportMapping FunctionImportName="asm_addCurrecy" FunctionName="AssetManagementModel.Store.asm_addCurrecy" />
+    <FunctionImportMapping FunctionImportName="asm_addRole" FunctionName="AssetManagementModel.Store.asm_addRole" />
+    <FunctionImportMapping FunctionImportName="asm_addSupplier" FunctionName="AssetManagementModel.Store.asm_addSupplier" />
+    <FunctionImportMapping FunctionImportName="asm_addUser" FunctionName="AssetManagementModel.Store.asm_addUser" />
+    <FunctionImportMapping FunctionImportName="asm_addUserRole" FunctionName="AssetManagementModel.Store.asm_addUserRole" />
+    <FunctionImportMapping FunctionImportName="asm_deleteAsset" FunctionName="AssetManagementModel.Store.asm_deleteAsset" />
+    <FunctionImportMapping FunctionImportName="asm_deleteCategory" FunctionName="AssetManagementModel.Store.asm_deleteCategory" />
+    <FunctionImportMapping FunctionImportName="asm_deleteCurrency" FunctionName="AssetManagementModel.Store.asm_deleteCurrency" />
+    <FunctionImportMapping FunctionImportName="asm_deleteLocation" FunctionName="AssetManagementModel.Store.asm_deleteLocation" />
+    <FunctionImportMapping FunctionImportName="asm_deleteRole" FunctionName="AssetManagementModel.Store.asm_deleteRole" />
+    <FunctionImportMapping FunctionImportName="asm_deleteSupplier" FunctionName="AssetManagementModel.Store.asm_deleteSupplier" />
+    <FunctionImportMapping FunctionImportName="asm_deleteUser" FunctionName="AssetManagementModel.Store.asm_deleteUser" />
+    <FunctionImportMapping FunctionImportName="asm_deleteUserRole" FunctionName="AssetManagementModel.Store.asm_deleteUserRole" />
+    <FunctionImportMapping FunctionImportName="asm_isExistAsset" FunctionName="AssetManagementModel.Store.asm_isExistAsset" />
+    <FunctionImportMapping FunctionImportName="asm_isExistCategory" FunctionName="AssetManagementModel.Store.asm_isExistCategory" />
+    <FunctionImportMapping FunctionImportName="asm_isExistCurrency" FunctionName="AssetManagementModel.Store.asm_isExistCurrency" />
+    <FunctionImportMapping FunctionImportName="asm_isExistLocation" FunctionName="AssetManagementModel.Store.asm_isExistLocation" />
+    <FunctionImportMapping FunctionImportName="asm_isExistRole" FunctionName="AssetManagementModel.Store.asm_isExistRole" />
+    <FunctionImportMapping FunctionImportName="asm_isExistSupplier" FunctionName="AssetManagementModel.Store.asm_isExistSupplier" />
+    <FunctionImportMapping FunctionImportName="asm_isExistUserRole" FunctionName="AssetManagementModel.Store.asm_isExistUserRole" />
+    <FunctionImportMapping FunctionImportName="asm_updateAsset" FunctionName="AssetManagementModel.Store.asm_updateAsset" />
+    <FunctionImportMapping FunctionImportName="asm_updateCategory" FunctionName="AssetManagementModel.Store.asm_updateCategory" />
+    <FunctionImportMapping FunctionImportName="asm_updateCurrency" FunctionName="AssetManagementModel.Store.asm_updateCurrency" />
+    <FunctionImportMapping FunctionImportName="asm_updateLocation" FunctionName="AssetManagementModel.Store.asm_updateLocation" />
+    <FunctionImportMapping FunctionImportName="asm_updateRole" FunctionName="AssetManagementModel.Store.asm_updateRole" />
+    <FunctionImportMapping FunctionImportName="asm_updateSupplier" FunctionName="AssetManagementModel.Store.asm_updateSupplier" />
+    <FunctionImportMapping FunctionImportName="asm_updateUser" FunctionName="AssetManagementModel.Store.asm_updateUser" />
+    <FunctionImportMapping FunctionImportName="asm_updateUserRole" FunctionName="AssetManagementModel.Store.asm_updateUserRole" />
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="AssetManagementModel.Branch">
+        <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactFax" ColumnName="ContactFax" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Zip_PostalCode" ColumnName="Zip_PostalCode" />
+          <ScalarProperty Name="State_Province" ColumnName="State_Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchUsers">
+      <EntityTypeMapping TypeName="AssetManagementModel.BranchUser">
+        <MappingFragment StoreEntitySet="BranchUser">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UCID" ColumnName="UCID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="AssetManagementModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="ContactFax" ColumnName="ContactFax" />
+          <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="Zip_PostalCode" ColumnName="Zip_PostalCode" />
+          <ScalarProperty Name="State_Province" ColumnName="State_Province" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Address3" ColumnName="Address3" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="MultipleDivision" ColumnName="MultipleDivision" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="AssetManagementModel.Country">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SortName" ColumnName="SortName" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="asm_getUsers1" FunctionName="AssetManagementModel.Store.asm_getUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getUsers1_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="User_Name" ColumnName="User Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="First_Name" ColumnName="First Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PIN" ColumnName="PIN" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getLocationdata1" FunctionName="AssetManagementModel.Store.asm_getLocationdata">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getLocationdata1_Result1">
+          <ScalarProperty Name="Location_Code" ColumnName="Location Code" />
+          <ScalarProperty Name="Location_Name" ColumnName="Location Name" />
+          <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getCategorydata" FunctionName="AssetManagementModel.Store.asm_getCategorydata">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getCategorydata_Result">
+          <ScalarProperty Name="Category_Code" ColumnName="Category Code" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location Code" />
+          <ScalarProperty Name="Category_Name" ColumnName="Category Name" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getCompanydata" FunctionName="AssetManagementModel.Store.asm_getCompanydata">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getCompanydata_Result">
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Company_Code" ColumnName="Company Code" />
+          <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getAssetdata" FunctionName="AssetManagementModel.Store.asm_getAssetdata">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getAssetdata_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Location_Code" ColumnName="Location Code" />
+          <ScalarProperty Name="Category_Code" ColumnName="Category Code" />
+          <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+          <ScalarProperty Name="RFID_Tag" ColumnName="RFID_Tag" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getBranchdata" FunctionName="AssetManagementModel.Store.asm_getBranchdata">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getBranchdata_Result">
+          <ScalarProperty Name="Branch_Code" ColumnName="Branch Code" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Branch_Name" ColumnName="Branch Name" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Actions" ColumnName="Actions" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getCompany" FunctionName="AssetManagementModel.Store.asm_getCompany">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getCompany_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getCountry" FunctionName="AssetManagementModel.Store.asm_getCountry">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getCountry_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getBranch" FunctionName="AssetManagementModel.Store.asm_getBranch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getBranch_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,244 @@
+﻿
+@{
+    ViewBag.Title = "ManageLocation";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+
+<section class="content-header">
+    <h1 class="text-center">Location Management</h1>
+</section>
+
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal">
+                Add Location
+            </button>
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal1">
+                Add Sub Location
+            </button>
+        </div>
+
+    </div>
+
+    <div id="jstree"></div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="table table-bordered" id="locationTable">
+                <thead>
+                    <tr>
+                        <th>Location Code</th>
+                        <th>Location Name</th>
+                        <th>Parent ID</th>
+                        <th>CreatedOn</th>
+                        <th>ModifiedOn</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Location-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Location Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <form id="locationForm" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Select Branch</label>
+                                <select class="form-control select2 selectBranch" style="width:100%">
+                                    <option value="null">Please select Branch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Location Name
+                                </label>
+                                <input class="form-control" type="text" id="locName" name="locationName" placeholder="Enter Location" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="btnaddLoc" type="submit" class="btn btn-block btn-primary" style="width:auto">Add Loaction</button>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sub Location -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Sub Location Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Branch</label>
+                                <select class="form-control select2 selectBranch" style="width:100%">
+                                    <option value="null">Please select branch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Location</label>
+                                <select class="form-control select2 selectLocation" style="width:100%">
+                                    <option value="null">Please select Location</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Sub Location Name
+                                </label>
+                                <input class="form-control" type="text" id="sublocName" name="sublocationName" placeholder="Enter Sub Location" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="btnaddSubloc" type="button" class="btn btn-block btn-primary" style="width:auto">Add Sub Location</button>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('#jstree').jstree({
+            "core": {
+                "animation": 0,
+                "check_callback": function (operation, node, node_parent, node_position, more) {
+                    console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more });
+                    //switch (operation) {
+                    //    case "create_node":
+                    //        console.log({ op: operation, no:node, np: node_parent, n_p: node_position, m:more})
+                    //    break;
+
+
+                    //}
+                },
+                "themes": { "stripes": true },
+                'data': [
+                    { "id": "ajson1", "parent": "#", "text": "Simple root node" },
+                    { "id": "ajson2", "parent": "#", "text": "Root node 2" },
+                    { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
+                    { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
+                ]
+            },
+            "types": {
+                "#": {
+                    "max_children": 1,
+                    "max_depth": 100,
+                    "valid_children": ["root"]
+                },
+                "root": {
+                    "icon": "/static/3.3.10/assets/images/tree_icon.png",
+                    "valid_children": ["default"]
+                },
+                "default": {
+                    "valid_children": ["default", "file"]
+                },
+                "file": {
+                    "icon": "glyphicon glyphicon-file",
+                    "valid_children": []
+                }
+            },
+            "plugins": [
+                "contextmenu", "dnd", "search",
+                "state", "types", "wholerow"
+            ]
+        });
+
+        getData({ name: 'Location', data: null });
+
+        populateSelectBox({ filterName: 'Branch', filterSelector: 'selectBranch', data: null });
+
+        $('.selectBranch').on('select2:select', function (e) {
+            var data = e.params.data;
+            var requestData = {
+                filterName: 'Location',
+                filterSelector: 'selectLocation',
+                data: {
+                    Id: 0,
+                    bId: data.id
+                }
+            };
+
+            populateSelectBox(requestData);
+        });
+
+        function addLocation(parentID, branchId, locationName) {
+
+            console.log(parentID, branchId, locationName);
+            //var locationData = {
+            //    Branch_ID: branchId,
+            //    Parent_ID: parentID,
+            //    Location_Name: locationName
+            //};
+            //addData(locationData, function (data) {
+            //    console.log(data);
+            //});
+        }
+
+
+        $('#btnaddLoc').off().click(function (event) {
+            $("#locationForm").off().submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                var location = {
+                    name: 'Location',
+                    data: form.serialize()
+                }
+                addData(user, function (data) {
+                    console.log(data);
+                });
+            });
+        });
+    });
+
+
+</script>

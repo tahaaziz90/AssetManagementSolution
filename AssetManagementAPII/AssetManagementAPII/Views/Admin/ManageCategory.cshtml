@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "ManageCategory";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+<section class="content-header">
+    <h1 class="text-center">Category Management</h1>
+</section>
+
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal">
+                Add Category
+            </button>
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal1">
+                Add Sub Category
+            </button>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="table table-bordered" id="categoryTable">
+                <thead>
+                    <tr>
+                        <th>Category Code</th>
+                        <th>Branch ID</th>
+                        <th>Location Code</th>
+                        <th>Category Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Location-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Category Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Select Branch</label>
+                                <select class="form-control select2 selectBranch" style="width:100%" >
+                                    <option value="null">Please select branch</option>
+                                     
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Category Name
+                                </label>
+                                <input class="form-control" type="text" id="catName" name="categoryName" placeholder="Enter Category" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="btnaddCat" type="submit" class="btn btn-block btn-primary" style="width:auto">Add Category</button>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Sub Location -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Sub Location Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Branch</label>
+                                <select class="form-control select2 select2 selectBranch" style="width:100%" >
+                                    <option value="value">Please select branch</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Category</label>
+                                <select class="form-control select2 selectCategory" style="width:100%" >
+                                    <option value="Null">Please select category</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Sub Category Name
+                                </label>
+                                <input class="form-control" type="text" id="subcatName" name="subcategoryName" placeholder="Enter Sub Category" />
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="btnaddSubCat" type="button" class="btn btn-block btn-primary" style="width:auto">Add Sub Category</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        getData({ name: 'Category', data: null });
+
+        populateSelectBox({ filterName: 'Branch', filterSelector: 'selectBranch', data: null });
+
+        $('.selectBranch').on('select2:select', function (e) {
+            var data = e.params.data;
+            var requestData = {
+                filterName: 'Category',
+                filterSelector: 'selectCategory',
+                data: {
+                    Id: 0,
+                    bId: data.id
+                }
+            };
+
+            populateSelectBox(requestData);
+        });
+
+
+        $('#btnaddCat').off().click(function (event) {
+            $("#categoryForm").off().submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                var category = {
+                    name: 'Category',
+                    data: form.serialize()
+                }
+                addData(user, function (data) {
+                    console.log(data);
+                });
+            });
+        });
+
+
+
+
+
+
+
+
+
+    });
+</script>
+

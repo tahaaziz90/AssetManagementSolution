@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "ManageCompany";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+<section class="content-header">
+    <h1 class="text-center">Company Management</h1>
+</section>
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal">
+                Add Company
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="table table-bordered" id="companyTable">
+                <thead>
+                    <tr>
+                        <th>CompnayID</th>
+                        <th>Company Code</th>
+                        <th>Company Name</th>
+                        <th>Country</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Company Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Company Code
+                                </label>
+                                <input class="form-control" maxlength="5" type="text" id="compCode" name="companyCode" placeholder="Company Code" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>
+                                    Company Name
+                                </label>
+                                <input class="form-control" type="text" id="compName" name="companyName" placeholder="Company Name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Division
+                                </label>
+                                <select class="form-control select2" id="selectDivision">
+                                    <option value="value">text1</option>
+                                    <option value="value">text2</option>
+                                    <option value="value">text3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select class="form-control select2 selectCountry" >
+                                    <option value="null">Select Country</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    City
+                                </label>
+                                <input class="form-control" type="text" name="cityfield" id="city" placeholder="City" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    State/Province
+                                </label>
+                                <input class="form-control" type="text" name="stateprovince" id="stprov" placeholder="State Province" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Postal Code
+                                </label>
+                                <input class="form-control" type="text" name="zippostalcode" id="zipcode" placeholder="Postal Code" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Contact Name
+                                </label>
+                                <input class="form-control" type="text" name="contactNmae" id="cName" placeholder="Name" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Contact Phone
+                                </label>
+                                <input class="form-control" type="number" name="phoneNumber" id="cNumber" placeholder="Phone" />
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Contact Fax
+                                </label>
+                                <input class="form-control" type="text" name="faxnumber" id="faxNum" placeholder="Fax" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>
+                                    Contact Email
+                                </label>
+                                <input class="form-control" type="email" name="contactEmail" id="cEmail" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Address
+                                </label>
+                                <input class="form-control " type="text" name="address" id="addr1" placeholder="Enter Address" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Address2
+                                </label>
+                                <input class="form-control" type="text" name="address2" id="addr2" placeholder="Enter Address 2" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>
+                                    Address3
+                                </label>
+                                <input class="form-control" type="text" name="address3" id="addr3" placeholder="Enter Address 3" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="btnaddCompany" type="button" class="btn btn-block btn-primary" style="width:auto">Add Branch</button>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        getData({ name: 'Company', data: null });
+
+        populateSelectBox({ filterName: 'Country', filterSelector: 'selectCountry', data: null });
+    });
+</script>

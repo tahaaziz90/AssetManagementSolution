@@ -1,0 +1,1205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssetManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location_Code" Type="Int32" Nullable="false" />
+    <Property Name="Category_Code" Type="Int32" Nullable="false" />
+    <Property Name="Purchase_ID" Type="Int32" Nullable="false" />
+    <Property Name="Asset_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RFID_Tag" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Barcode" Type="Int32" />
+    <Property Name="Created_On" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Asset_Category" FromRole="Asset" ToRole="Category" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_Asset_Location" FromRole="Asset" ToRole="Location" />
+    <NavigationProperty Name="Purchase" Relationship="Self.FK_Asset_Purchases" FromRole="Asset" ToRole="Purchases" />
+    <NavigationProperty Name="AssetDisposals" Relationship="Self.FK_AssetDisposal_Asset" FromRole="Asset" ToRole="AssetDisposal" />
+    <NavigationProperty Name="Movements" Relationship="Self.FK_Movement_Asset" FromRole="Asset" ToRole="Movement" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="AssetManagementModel.FK_Asset_Branch" FromRole="Asset" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="AssetDisposal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Asset_ID" Type="Int32" Nullable="false" />
+    <Property Name="Disposal_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Asset" Relationship="Self.FK_AssetDisposal_Asset" FromRole="AssetDisposal" ToRole="Asset" />
+    <NavigationProperty Name="Disposal" Relationship="Self.FK_AssetDisposal_Disposal" FromRole="AssetDisposal" ToRole="Disposal" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_Code" />
+    </Key>
+    <Property Name="Category_Code" Type="Int32" Nullable="false" />
+    <Property Name="Location_Code" Type="Int32" Nullable="false" />
+    <Property Name="Category_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Parent_ID" Type="Int32" Nullable="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_Category" FromRole="Category" ToRole="Asset" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_Category_Location" FromRole="Category" ToRole="Location" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="AssetManagementModel.FK_Category_Branch" FromRole="Category" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Currency_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Currency_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Currency_Symbol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_Currency" FromRole="Currency" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="Disposal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Disposal_Number" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfDisposal" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DisposedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AssetDisposals" Relationship="Self.FK_AssetDisposal_Disposal" FromRole="Disposal" ToRole="AssetDisposal" />
+    <NavigationProperty Name="DisposalDetails" Relationship="Self.FK_DisposalDetail_Disposal" FromRole="Disposal" ToRole="DisposalDetail" />
+  </EntityType>
+  <EntityType Name="DisposalDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Disposal_ID" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Disposal" Relationship="Self.FK_DisposalDetail_Disposal" FromRole="DisposalDetail" ToRole="Disposal" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Location_Code" />
+    </Key>
+    <Property Name="Location_Code" Type="Int32" Nullable="false" />
+    <Property Name="Location_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Parent_ID" Type="Int32" Nullable="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_Location" FromRole="Location" ToRole="Asset" />
+    <NavigationProperty Name="Categories" Relationship="Self.FK_Category_Location" FromRole="Location" ToRole="Category" />
+    <NavigationProperty Name="Movements" Relationship="Self.FK_Movement_Location" FromRole="Location" ToRole="Movement" />
+    <NavigationProperty Name="Movements1" Relationship="Self.FK_Movement_Location1" FromRole="Location" ToRole="Movement" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="AssetManagementModel.FK_Location_Branch" FromRole="Location" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="Movement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Asset_ID" Type="Int32" Nullable="false" />
+    <Property Name="Previous_Location" Type="Int32" Nullable="false" />
+    <Property Name="New_Location" Type="Int32" Nullable="false" />
+    <Property Name="Movement_On" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Movement_By" Type="Int32" Nullable="false" />
+    <Property Name="Movement_From" Type="Int32" Nullable="false" />
+    <Property Name="Movement_To" Type="Int32" Nullable="false" />
+    <Property Name="Movement_Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Asset" Relationship="Self.FK_Movement_Asset" FromRole="Movement" ToRole="Asset" />
+    <NavigationProperty Name="Location" Relationship="Self.FK_Movement_Location" FromRole="Movement" ToRole="Location" />
+    <NavigationProperty Name="Location1" Relationship="Self.FK_Movement_Location1" FromRole="Movement" ToRole="Location" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Movement_User" FromRole="Movement" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_Movement_User1" FromRole="Movement" ToRole="User" />
+    <NavigationProperty Name="User2" Relationship="Self.FK_Movement_User2" FromRole="Movement" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Permission_Name" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RolePermissions" Relationship="Self.FK_RolePermission_Permission" FromRole="Permission" ToRole="RolePermission" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Currency_ID" Type="Int32" Nullable="false" />
+    <Property Name="Supplier_ID" Type="Int32" Nullable="false" />
+    <Property Name="PO_Number" Type="Int32" Nullable="false" />
+    <Property Name="Invoice_Number" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Unit_Price" Type="Double" />
+    <Property Name="Freight" Type="Double" />
+    <Property Name="Tax" Type="Double" />
+    <Property Name="Discount_Percent" Type="Double" />
+    <Property Name="Total_Price" Type="Double" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PO_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Ship_Date" Type="DateTime" Precision="3" />
+    <Property Name="Received_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_Purchases" FromRole="Purchases" ToRole="Asset" />
+    <NavigationProperty Name="Currency" Relationship="Self.FK_Purchases_Currency" FromRole="Purchases" ToRole="Currency" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_Purchases_Supplier" FromRole="Purchases" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RolePermissions" Relationship="Self.FK_RolePermission_Role" FromRole="Role" ToRole="RolePermission" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_Role" FromRole="Role" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="RolePermission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_ID" Type="Int32" Nullable="false" />
+    <Property Name="Permission_ID" Type="Int32" Nullable="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK_RolePermission_Permission" FromRole="RolePermission" ToRole="Permission" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_RolePermission_Role" FromRole="RolePermission" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Supplier_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_Supplier" FromRole="Supplier" ToRole="Purchases" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="IsOnline" Type="Boolean" Nullable="false" />
+    <Property Name="Pin" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Movements" Relationship="Self.FK_Movement_User" FromRole="User" ToRole="Movement" />
+    <NavigationProperty Name="Movements1" Relationship="Self.FK_Movement_User1" FromRole="User" ToRole="Movement" />
+    <NavigationProperty Name="Movements2" Relationship="Self.FK_Movement_User2" FromRole="User" ToRole="Movement" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+    <NavigationProperty Name="BranchUsers" Relationship="AssetManagementModel.FK_UserCompany_User" FromRole="User" ToRole="BranchUser" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_ID" Type="Int32" Nullable="false" />
+    <Property Name="Role_ID" Type="Int32" Nullable="false" />
+    <Property Name="Created_On" Type="DateTime" Precision="3" />
+    <Property Name="Modified_On" Type="DateTime" Precision="3" />
+    <Property Name="Deleted_On" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_UserRole_Role" FromRole="UserRole" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Asset_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Category_Code" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="Category_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Location_Code" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="Location_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_Purchases">
+    <End Role="Purchases" Type="Self.Purchase" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchases">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="Purchase_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetDisposal_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetDisposal" Type="Self.AssetDisposal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssetDisposal">
+        <PropertyRef Name="Asset_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movement">
+        <PropertyRef Name="Asset_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetDisposal_Disposal">
+    <End Role="Disposal" Type="Self.Disposal" Multiplicity="1" />
+    <End Role="AssetDisposal" Type="Self.AssetDisposal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disposal">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AssetDisposal">
+        <PropertyRef Name="Disposal_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="Category" Type="Self.Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Location_Code" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="Location_Code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_Currency">
+    <End Role="Currency" Type="Self.Currency" Multiplicity="1" />
+    <End Role="Purchases" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="Currency_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DisposalDetail_Disposal">
+    <End Role="Disposal" Type="Self.Disposal" Multiplicity="1" />
+    <End Role="DisposalDetail" Type="Self.DisposalDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disposal">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DisposalDetail">
+        <PropertyRef Name="Disposal_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Location_Code" />
+      </Principal>
+      <Dependent Role="Movement">
+        <PropertyRef Name="Previous_Location" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement_Location1">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Location_Code" />
+      </Principal>
+      <Dependent Role="Movement">
+        <PropertyRef Name="New_Location" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movement">
+        <PropertyRef Name="Movement_By" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movement">
+        <PropertyRef Name="Movement_From" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movement_User2">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Movement" Type="Self.Movement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Movement">
+        <PropertyRef Name="Movement_To" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermission_Permission">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="Permission_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchases_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Purchases" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Purchases">
+        <PropertyRef Name="Supplier_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePermission_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RolePermission" Type="Self.RolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RolePermission">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="Role_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AssetManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Assets" EntityType="Self.Asset" />
+    <EntitySet Name="AssetDisposals" EntityType="Self.AssetDisposal" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Currencies" EntityType="Self.Currency" />
+    <EntitySet Name="Disposals" EntityType="Self.Disposal" />
+    <EntitySet Name="DisposalDetails" EntityType="Self.DisposalDetail" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="Movements" EntityType="Self.Movement" />
+    <EntitySet Name="Permissions" EntityType="Self.Permission" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="RolePermissions" EntityType="Self.RolePermission" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <AssociationSet Name="FK_Asset_Category" Association="Self.FK_Asset_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_Location" Association="Self.FK_Asset_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_Purchases" Association="Self.FK_Asset_Purchases">
+      <End Role="Purchases" EntitySet="Purchases" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetDisposal_Asset" Association="Self.FK_AssetDisposal_Asset">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="AssetDisposal" EntitySet="AssetDisposals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement_Asset" Association="Self.FK_Movement_Asset">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="Movement" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetDisposal_Disposal" Association="Self.FK_AssetDisposal_Disposal">
+      <End Role="Disposal" EntitySet="Disposals" />
+      <End Role="AssetDisposal" EntitySet="AssetDisposals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Location" Association="Self.FK_Category_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_Currency" Association="Self.FK_Purchases_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DisposalDetail_Disposal" Association="Self.FK_DisposalDetail_Disposal">
+      <End Role="Disposal" EntitySet="Disposals" />
+      <End Role="DisposalDetail" EntitySet="DisposalDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement_Location" Association="Self.FK_Movement_Location">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Movement" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement_Location1" Association="Self.FK_Movement_Location1">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="Movement" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement_User" Association="Self.FK_Movement_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Movement" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement_User1" Association="Self.FK_Movement_User1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Movement" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movement_User2" Association="Self.FK_Movement_User2">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Movement" EntitySet="Movements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermission_Permission" Association="Self.FK_RolePermission_Permission">
+      <End Role="Permission" EntitySet="Permissions" />
+      <End Role="RolePermission" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchases_Supplier" Association="Self.FK_Purchases_Supplier">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Purchases" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePermission_Role" Association="Self.FK_RolePermission_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="RolePermission" EntitySet="RolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <FunctionImport Name="asm_getCategory" ReturnType="Collection(AssetManagementModel.asm_getCategory_Result)">
+      <Parameter Name="parentId" Mode="In" Type="Int32" />
+      <Parameter Name="branchId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getLocations" ReturnType="Collection(AssetManagementModel.asm_getLocations_Result)">
+      <Parameter Name="parentId" Mode="In" Type="Int32" />
+      <Parameter Name="branchId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getAsset" ReturnType="Collection(AssetManagementModel.getAsset_Result)">
+      <Parameter Name="Category" Mode="In" Type="Int32" />
+      <Parameter Name="Location" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(AssetManagementModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(AssetManagementModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="spCategory" ReturnType="Collection(AssetManagementModel.spCategory_Result)" />
+    <FunctionImport Name="UserAuthentication" ReturnType="Collection(String)">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addLocation">
+      <Parameter Name="LocationName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addAsset">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseId" Mode="In" Type="Int32" />
+      <Parameter Name="assetNumber" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addCategory">
+      <Parameter Name="CategoryName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addCurrecy">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="CurrencyName" Mode="In" Type="String" />
+      <Parameter Name="CurrencyCode" Mode="In" Type="String" />
+      <Parameter Name="CurrencySymbol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addRole">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="RoleName" Mode="In" Type="String" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addSupplier">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="SupplierName" Mode="In" Type="String" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addUser">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Designation" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="asm_addUserRole">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteAsset">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteCategory">
+      <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteCurrency">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteLocation">
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteRole">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteSupplier">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteUser">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_deleteUserRole">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistAsset" ReturnType="Collection(Int32)">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistCategory" ReturnType="Collection(Int32)">
+      <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistCurrency" ReturnType="Collection(Int32)">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistLocation" ReturnType="Collection(Int32)">
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistRole" ReturnType="Collection(Int32)">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistSupplier" ReturnType="Collection(Int32)">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_isExistUserRole" ReturnType="Collection(Int32)">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateAsset">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseId" Mode="In" Type="Int32" />
+      <Parameter Name="assetNumber" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateCategory">
+      <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryName" Mode="In" Type="String" />
+      <Parameter Name="ParentId" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateCurrency">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="CurrencyName" Mode="In" Type="String" />
+      <Parameter Name="CurrencyCode" Mode="In" Type="String" />
+      <Parameter Name="CurrencySymbol" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateLocation">
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+      <Parameter Name="LocationName" Mode="In" Type="String" />
+      <Parameter Name="ParentId" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateRole">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="RoleName" Mode="In" Type="String" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateSupplier">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="SupplierName" Mode="In" Type="String" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateUser">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="FirstName" Mode="In" Type="String" />
+      <Parameter Name="LastName" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Mobile" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+      <Parameter Name="Pin" Mode="In" Type="Int32" />
+      <Parameter Name="Designation" Mode="In" Type="String" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="isOnline" Mode="In" Type="Boolean" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_updateUserRole">
+      <Parameter Name="iD" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="RoleId" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="Status" Mode="In" Type="Boolean" />
+      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getUsers" ReturnType="Collection(AssetManagementModel.asm_getUsers_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Branches" EntityType="AssetManagementModel.Branch" />
+    <EntitySet Name="BranchUsers" EntityType="AssetManagementModel.BranchUser" />
+    <EntitySet Name="Companies" EntityType="AssetManagementModel.Company" />
+    <EntitySet Name="Countries" EntityType="AssetManagementModel.Country" />
+    <AssociationSet Name="FK_Asset_Branch" Association="AssetManagementModel.FK_Asset_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Company" Association="AssetManagementModel.FK_Branch_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Branch" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Countries" Association="AssetManagementModel.FK_Branch_Countries">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Branch" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCompany_Branch" Association="AssetManagementModel.FK_UserCompany_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="BranchUser" EntitySet="BranchUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCompany_User" Association="AssetManagementModel.FK_UserCompany_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="BranchUser" EntitySet="BranchUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_Countries" Association="AssetManagementModel.FK_Company_Countries">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <FunctionImport Name="Testing" ReturnType="Collection(AssetManagementModel.Testing_Result)" />
+    <FunctionImport Name="asm_getUsers1" ReturnType="Collection(AssetManagementModel.asm_getUsers1_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getLocationdata" ReturnType="Collection(AssetManagementModel.asm_getLocationdata_Result)">
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getLocationdata1" ReturnType="Collection(AssetManagementModel.asm_getLocationdata1_Result1)">
+      <Parameter Name="LocationCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getCategorydata" ReturnType="Collection(AssetManagementModel.asm_getCategorydata_Result)">
+      <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getCompanydata" ReturnType="Collection(AssetManagementModel.asm_getCompanydata_Result)">
+      <Parameter Name="CompanyID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getAssetdata" ReturnType="Collection(AssetManagementModel.asm_getAssetdata_Result)">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getBranchdata" ReturnType="Collection(AssetManagementModel.asm_getBranchdata_Result)">
+      <Parameter Name="BranchCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getCompany" ReturnType="Collection(AssetManagementModel.asm_getCompany_Result)">
+      <Parameter Name="companyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getCountry" ReturnType="Collection(AssetManagementModel.asm_getCountry_Result)">
+      <Parameter Name="countryId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="asm_getBranch" ReturnType="Collection(AssetManagementModel.asm_getBranch_Result)">
+      <Parameter Name="CompanyId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <AssociationSet Name="FK_Category_Branch" Association="AssetManagementModel.FK_Category_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_Branch" Association="AssetManagementModel.FK_Location_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="asm_getCategory_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="asm_getLocations_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="getAsset_Result">
+    <Property Type="String" Name="Asset_Number" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="Category_Code" Nullable="false" />
+    <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spCategory_Result">
+    <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="Int32" Name="Category_Code" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="asm_getUsers_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="User_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="First_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Pin" Nullable="true" />
+    <Property Type="String" Name="Designation" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="BranchName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State_Province" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Zip_PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="Int32" Nullable="false" />
+    <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ContactFax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Assets" Relationship="AssetManagementModel.FK_Asset_Branch" FromRole="Branch" ToRole="Asset" />
+    <NavigationProperty Name="Company" Relationship="AssetManagementModel.FK_Branch_Company" FromRole="Branch" ToRole="Company" />
+    <NavigationProperty Name="Country1" Relationship="AssetManagementModel.FK_Branch_Countries" FromRole="Branch" ToRole="Country" />
+    <NavigationProperty Name="BranchUsers" Relationship="AssetManagementModel.FK_UserCompany_Branch" FromRole="Branch" ToRole="BranchUser" />
+    <Property Name="isDeleted" Type="Boolean" />
+    <NavigationProperty Name="Categories" Relationship="AssetManagementModel.FK_Category_Branch" FromRole="Branch" ToRole="Category" />
+    <NavigationProperty Name="Locations" Relationship="AssetManagementModel.FK_Location_Branch" FromRole="Branch" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="BranchUser">
+    <Key>
+      <PropertyRef Name="UCID" />
+    </Key>
+    <Property Name="UCID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="BranchID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Branch" Relationship="AssetManagementModel.FK_UserCompany_Branch" FromRole="BranchUser" ToRole="Branch" />
+    <NavigationProperty Name="User" Relationship="AssetManagementModel.FK_UserCompany_User" FromRole="BranchUser" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MultipleDivision" Type="Int32" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="State_Province" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Zip_PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactFax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactEmail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Branches" Relationship="AssetManagementModel.FK_Branch_Company" FromRole="Company" ToRole="Branch" />
+    <NavigationProperty Name="Country1" Relationship="AssetManagementModel.FK_Company_Countries" FromRole="Company" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SortName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Branches" Relationship="AssetManagementModel.FK_Branch_Countries" FromRole="Country" ToRole="Branch" />
+    <NavigationProperty Name="Companies" Relationship="AssetManagementModel.FK_Company_Countries" FromRole="Country" ToRole="Company" />
+  </EntityType>
+  <Association Name="FK_Asset_Branch">
+    <End Type="AssetManagementModel.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="AssetManagementModel.Asset" Role="Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Company">
+    <End Type="AssetManagementModel.Company" Role="Company" Multiplicity="1" />
+    <End Type="AssetManagementModel.Branch" Role="Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Countries">
+    <End Type="AssetManagementModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="AssetManagementModel.Branch" Role="Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="Country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCompany_Branch">
+    <End Type="AssetManagementModel.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="AssetManagementModel.BranchUser" Role="BranchUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="BranchUser">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCompany_User">
+    <End Type="AssetManagementModel.User" Role="User" Multiplicity="1" />
+    <End Type="AssetManagementModel.BranchUser" Role="BranchUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BranchUser">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_Countries">
+    <End Type="AssetManagementModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="AssetManagementModel.Company" Role="Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="Country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Testing_Result">
+    <Property Type="Int32" Name="pogo" Nullable="false" />
+    <Property Type="Int32" Name="cartoon" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="asm_getUsers1_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="User_Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="First_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="PIN" Nullable="false" />
+    <Property Type="String" Name="Designation" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getLocationdata_Result">
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Parent_ID" Nullable="false" />
+    <Property Type="String" Name="Column1" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="ModifiedOn" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getLocationdata1_Result">
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Parent_ID" Nullable="false" />
+    <Property Type="String" Name="Created_On" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="ModifiedOn" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getLocationdata2_Result">
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Parent_ID" Nullable="false" />
+    <Property Type="String" Name="Created_On" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="ModifiedOn" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getLocationdata1_Result1">
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="String" Name="Location_Name" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="Parent_ID" Nullable="false" />
+    <Property Type="String" Name="CreatedOn" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="ModifiedOn" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getCategorydata_Result">
+    <Property Type="Int32" Name="Category_Code" Nullable="false" />
+    <Property Type="Int32" Name="BranchID" Nullable="false" />
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="String" Name="Category_Name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getCompanydata_Result">
+    <Property Type="Int32" Name="CompanyID" Nullable="false" />
+    <Property Type="String" Name="Company_Code" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Company_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Country" Nullable="false" />
+    <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="false" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getAssetdata_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="false" />
+    <Property Type="Int32" Name="BranchID" Nullable="false" />
+    <Property Type="Int32" Name="Location_Code" Nullable="false" />
+    <Property Type="Int32" Name="Category_Code" Nullable="false" />
+    <Property Type="Int32" Name="PurchaseID" Nullable="false" />
+    <Property Type="String" Name="RFID_Tag" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Barcode" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getBranchdata_Result">
+    <Property Type="String" Name="Branch_Code" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CompanyID" Nullable="false" />
+    <Property Type="String" Name="Branch_Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Country" Nullable="false" />
+    <Property Type="String" Name="Contact" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="Status" Nullable="false" />
+    <Property Type="String" Name="Actions" Nullable="false" MaxLength="106" />
+  </ComplexType>
+  <ComplexType Name="asm_getCompany_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="asm_getCountry_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="asm_getBranch_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <Association Name="FK_Category_Branch">
+    <End Type="AssetManagementModel.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="AssetManagementModel.Category" Role="Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_Branch">
+    <End Type="AssetManagementModel.Branch" Role="Branch" Multiplicity="1" />
+    <End Type="AssetManagementModel.Location" Role="Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

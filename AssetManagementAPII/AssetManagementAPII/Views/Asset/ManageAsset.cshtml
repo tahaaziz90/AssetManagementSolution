@@ -1,0 +1,322 @@
+﻿
+@{
+    ViewBag.Title = "ManageAsset";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+
+<section class="content-header">
+    <h1 class="text-center">Asset Management</h1>
+</section>
+
+<section>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal">
+                Add Single Asset
+            </button>
+            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal1">
+                Add Bulk Assets
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table class="table table-bordered" id="assetTable">
+                <thead>
+                    <tr>
+                        <th>Asset ID</th>
+                        <th>Branch ID</th>
+                        <th>Location Code</th>
+                        <th>Category Code</th>
+                        <th>Purchase ID</th>
+                        <th>RFID</th>
+                        <th>Barcode</th>
+                        <th>CreatedOn</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Asset Addition-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Asset Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Branch</label>
+                                <select class="form-control select2 selectBranch" style="width:100%">
+                                    <option value="null">Please select Branch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Location</label>
+                                <select class="form-control select2 selectLocation" style="width:100%">
+                                    <option value="null">Please select Location</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Category</label>
+                                <select class="form-control select2 selectCategory" style="width:100%">
+                                    <option value="Null">Please select category</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Purchase ID
+                                </label>
+                                <input class="form-control" type="text" name="purchaseID" id="pID" placeholder="Purchase ID" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Asset ID
+                                </label>
+                                <input class="form-control" type="text" name="assetIDNumber" id="assetID" placeholder="Asset ID" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Asset Description
+                                </label>
+                                <input class="form-control" type="text" name="assetDescription" id="assetDes" placeholder="Asset Description" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    RFID
+                                </label>
+                                <input class="form-control" type="text" name="RFIDnumber" id="RFID" placeholder="RFID" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Barcode
+                                </label>
+                                <input class="form-control" type="text" name="barcodeNumber" id="barCode" placeholder="Barcode" />
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button id="btnaddAsset" type="button" class="btn btn-block btn-primary" style="width:auto">Add Asset</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Bulk Asset Addition</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Loacation</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">L1</option>
+                                    <option value="value">L2</option>
+                                    <option value="value">L3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Asset Description</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="assetDes">
+                                    <option value="value">D1</option>
+                                    <option value="value">D2</option>
+                                    <option value="value">D3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>(If Asset Description not listed add new)</p>
+                            <button class="btn btn-sm btn-warning">+ Add New Description</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Asset Group</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">Asset Group</option>
+                                    <option value="value">2</option>
+                                    <option value="value">3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Asset Category</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">Asset Category</option>
+                                    <option value="value">2</option>
+                                    <option value="value">3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">BarcodeID</label>
+                                <p>Pelase Enter (MAX 200) Barcodes in every new line</p>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Section Name</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">Asset Section</option>
+                                    <option value="value">L2</option>
+                                    <option value="value">L3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Room No</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">Asset Room No</option>
+                                    <option value="value">L2</option>
+                                    <option value="value">L3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Room Type</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">Asset Room Type</option>
+                                    <option value="value">L2</option>
+                                    <option value="value">L3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Floor</label>
+                                <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selctLoc">
+                                    <option value="value">Asset Floor</option>
+                                    <option value="value">L2</option>
+                                    <option value="value">L3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="file-field">
+                                <div class="z-depth-1-half mb-4">
+                                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" class="img-fluid" alt="example placeholder">
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="btn btn-mdb-color btn-rounded float-left waves-effect waves-light">
+                                        <input type="file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button id="btnaddAsset" type="button" class="btn btn-block btn-primary" style="width:auto">Add Asset</button>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        getData({ name: 'Asset', data: null });
+
+        populateSelectBox({ filterName: 'Branch', filterSelector: 'selectBranch', data: null });
+
+        $('.selectBranch').on('select2:select', function (e) {
+            var data = e.params.data;
+            var requestData = {
+                filterName: 'Location',
+                filterSelector: 'selectLocation',
+                data: {
+                    Id: 0,
+                    bId: data.id
+                }
+            };
+
+            populateSelectBox(requestData);
+        });
+        $('.selectBranch').on('select2:select', function (e) {
+            var data = e.params.data;
+            var requestData = {
+                filterName: 'Category',
+                filterSelector: 'selectCategory',
+                data: {
+                    Id: 0,
+                    bId: data.id
+                }
+            };
+
+            populateSelectBox(requestData);
+        });
+
+    });
+</script>
+
+
+
+

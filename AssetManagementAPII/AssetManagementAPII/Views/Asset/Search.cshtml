@@ -1,0 +1,186 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AssetSearch</title>
+    <!-- Tell the browser to be responsive to screen width -->
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h4>Select Location</h4>
+            <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Location</label>
+
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control">
+                                <option>All</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-3">
+                    <label for="barcode">BarcodeID</label>
+                    <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+
+                        <input type="text" placeholder="Enter BarcodeID" name="search2">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h4>Search Asset</h4>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Location</label>
+
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-4">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h1>0</h1>
+                            <p>Total Assets</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Asset Group</label>
+                    <select class="form-control">
+                        <option>Option1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control">
+                        <option>Option1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Section Name</label>
+                    <select class="form-control">
+                        <option>Option1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Room No</label>
+                    <select class="form-control">
+                        <option>Option1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Room Type</label>
+                    <select class="form-control">
+                        <option>Option1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Floor</label>
+                    <select class="form-control">
+                        <option>Option1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                        <option>option 5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-block bg-gradient-primary btn-sm">Search</button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-block bg-gradient-danger btn-sm">Clear</button>
+            </div>
+        </div>
+    </div>
+
+   
+
+</body>
+</html>
+

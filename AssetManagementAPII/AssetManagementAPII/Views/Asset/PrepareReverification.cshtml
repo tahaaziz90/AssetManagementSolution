@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "PrepareReverification";
+    Layout = "~/Views/Shared/standard.cshtml";
+}
+
+<section>
+    <form class="card">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-11"><h5>Select Location</h5></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Location</label>
+                    <select class="form-control select2 select2-hidden-accessible" style="width:100%" id="selectLocation`">
+                        <option value="value">Location</option>
+                        <option value="value">Location2</option>
+                        <option value="value">Location3</option>
+                        <option value="value">Location4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3"><br /><h4>Prepare Asset Reverification</h4></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h1>SCAN</h1>
+
+                            <p>Scan Assets for Reverification</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-block btn-success">Start Reverification</button>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </form>
+</section>

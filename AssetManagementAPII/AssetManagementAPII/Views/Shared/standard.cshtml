@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+    <title>Asset Management</title>
+    @Styles.Render("~/standard/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/standard/js")
+    @Scripts.Render("~/standard/bootstrap")
+    @Scripts.Render("~/Scripts/datatables")
+
+</head>
+<body class="skin-blue layout-top-nav">
+    <div class="wrapper">
+        <header class="main-header">
+            <nav class="navbar navbar-expand navbar-primary navbar-dark">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="~/Admin/ManageBranch" id="mBranch">Manage Branch</a>
+                            <a class="dropdown-item" href="~/Admin/ManageCategory" id="mCategory">Manage Category</a>
+                            <a class="dropdown-item" href="~/Admin/ManageCompany" id="mCompany">Manage Company</a>
+                            <a class="dropdown-item" href="~/Admin/ManageLocation" id="mLocation">Manage Location</a>
+                            <a class="dropdown-item" href="~/Admin/ManagePassword" id="mPass">Manage Pasword</a>
+                            <a class="dropdown-item" href="~/Admin/ManageUser" id="mUser">Manage User</a>
+                        </div>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="~/Home/Index" class="nav-link" id="dBoard">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Disposal</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Prepare</a>
+                            <a class="dropdown-item" href="#">Validate</a>
+                            <a class="dropdown-item" href="#">Review</a>
+                            <a class="dropdown-item" href="#">Verify</a>
+                            <a class="dropdown-item" href="~/Disposal/Agree">Agree</a>
+                            <a class="dropdown-item" href="#">Approve</a>
+                            <a class="dropdown-item" href="#">Status</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Inventory Management</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="~/Asset/ManageAsset">Manage Asset</a>
+                            <a class="dropdown-item" href="#">Asset Search</a>
+                            <a class="dropdown-item" href="#">Asset Reverification</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Movement</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Asset Movement</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reports</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Asset History</a>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>
+                            <a href="~/Login/Logout" class="btn btn-block btn-danger">Logout</a>
+                        </strong>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        @RenderBody()
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.0.2
+            </div>
+            <strong>Asset Management & Tracking Solution @DateTime.Now.Year</strong> All rights
+            reserved.(Designed & Developed By SYED TAHA AZIZ ID:63307)
+        </footer>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+
+
+
+        //$('#logoutButton').on('click', function(e){
+        //        window.location.href = 'http://localhost:50658/Login/Logout';
+        //});
+        //$('#mBranch').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Admin/ManageBranch';
+        //});
+        //$('#mCategory').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Admin/ManageCategory';
+        //});
+        //$('#mCompany').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Admin/ManageCompany';
+        //});
+        //$('#mLocation').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Admin/ManageLocation';
+        //});
+        //$('#mPass').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Admin/ManagePassword';
+        //});
+        //$('#mUser').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Admin/ManageUser';
+        //});
+        //$('#dBoard').on('click', function (e) {
+        //    window.location.href = 'http://localhost:50658/Home/Index';
+        //});
+    //});
+    </script>
+
+</body>
+</html>
