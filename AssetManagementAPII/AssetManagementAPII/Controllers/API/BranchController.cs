@@ -12,6 +12,35 @@ namespace AssetManagementAPII.Controllers.API
     public class BranchController : ApiController
     {
         [HttpGet]
+        public IEnumerable<TreeData> getBranchTree(int companyId)
+        {
+            using (AssetManagementEntities entities = new AssetManagementEntities())
+            {
+                List<TreeData> branchFilter = new List<TreeData>();
+                try
+                {
+                    var branches = entities.asm_getCategoryTree(companyId);
+                    foreach (var bra in branches)
+                    {
+                        branchFilter.Add(new TreeData
+                        {
+                            id = bra.id,
+                            text = bra.text,
+                            parent = bra.parent
+                        });
+                    }
+                    return branchFilter;
+                }
+                catch (Exception e)
+                {
+
+                }
+                return branchFilter;
+            }
+
+        }
+
+        [HttpGet]
         public IEnumerable<Filter> getBranchList (int companyId)
         {
             using(AssetManagementEntities entities = new AssetManagementEntities())

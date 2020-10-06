@@ -208,13 +208,21 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UserAuthentication", emailParameter, passwordParameter);
         }
     
-        public virtual int asm_addLocation(string locationName)
+        public virtual ObjectResult<asm_addLocation_Result> asm_addLocation(string locationName, Nullable<int> parentID, Nullable<int> branchID)
         {
             var locationNameParameter = locationName != null ?
                 new ObjectParameter("LocationName", locationName) :
                 new ObjectParameter("LocationName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_addLocation", locationNameParameter);
+            var parentIDParameter = parentID.HasValue ?
+                new ObjectParameter("ParentID", parentID) :
+                new ObjectParameter("ParentID", typeof(int));
+    
+            var branchIDParameter = branchID.HasValue ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asm_addLocation_Result>("asm_addLocation", locationNameParameter, parentIDParameter, branchIDParameter);
         }
     
         public virtual int asm_addAsset(Nullable<int> iD, Nullable<int> locationCode, Nullable<int> categoryCode, Nullable<int> purchaseId, Nullable<int> assetNumber, Nullable<System.DateTime> createdOn, Nullable<bool> isDeleted)
@@ -993,6 +1001,33 @@ namespace Model
                 new ObjectParameter("CompanyId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asm_getBranch_Result>("asm_getBranch", companyIdParameter);
+        }
+    
+        public virtual ObjectResult<asm_getLocationTree_Result> asm_getLocationTree(Nullable<int> branchId)
+        {
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("branchId", branchId) :
+                new ObjectParameter("branchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asm_getLocationTree_Result>("asm_getLocationTree", branchIdParameter);
+        }
+    
+        public virtual ObjectResult<asm_getCategoryTree_Result> asm_getCategoryTree(Nullable<int> branchId)
+        {
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("branchId", branchId) :
+                new ObjectParameter("branchId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asm_getCategoryTree_Result>("asm_getCategoryTree", branchIdParameter);
+        }
+    
+        public virtual ObjectResult<asm_getBranchTree_Result> asm_getBranchTree(Nullable<int> companyId)
+        {
+            var companyIdParameter = companyId.HasValue ?
+                new ObjectParameter("companyId", companyId) :
+                new ObjectParameter("companyId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asm_getBranchTree_Result>("asm_getBranchTree", companyIdParameter);
         }
     }
 }

@@ -32,7 +32,11 @@ var api = {
             method: 'GET'
         },
         update: '',
-        delete: ''
+        delete: '',
+        tree: {
+            url: '/api/Location/getLocationTree',
+            mehtod: 'GET',
+        }
     },
     Category: {
         get: {
@@ -51,7 +55,11 @@ var api = {
             data: null
         },
         update: '',
-        delete: ''
+        delete: '',
+        tree: {
+            url: '/api/Category/getCategoryTree',
+            mehtod: 'GET',
+        }
     },
     Company: {
         get: {
@@ -81,7 +89,11 @@ var api = {
         },
         add: '',
         update: '',
-        delete: ''
+        delete: '',
+        tree: {
+            url: '/api/Branch/getBranchTree',
+            mehtod: 'GET',
+        }
     },
     Asset: {
         get: {

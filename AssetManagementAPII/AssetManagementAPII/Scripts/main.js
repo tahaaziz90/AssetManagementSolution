@@ -12,6 +12,20 @@
     });
 }
 
+function getTreeData(entity, callback) {
+    var treeData = {
+        url: baseUrl.concat(api[entity.name].tree.url),
+        method: api[entity.name].tree.method,
+        data: entity.data
+    }
+
+    ajaxCall(treeData, function (data) {
+        callback(data);
+    });
+
+
+};
+
 function addData(entity, callback) {
 
     var request = {

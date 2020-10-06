@@ -27,8 +27,15 @@ namespace SharedModel
         public string userAddress { get; set; }
     }
 
+    public class returnID
+    {
+        public int Id { get; set; }
+    }
+
     public class LocationAdditionModel {
-        public string Name { get; set; }
+        public string Parent_ID { get; set; }
+        public string Branch_ID { get; set; }
+        public string Location_Name { get; set; }
     }
 
     public class CategoryAdditionModel {

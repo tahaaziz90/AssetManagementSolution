@@ -12,19 +12,41 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-4">
-            <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal">
+            @*<button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal">
                 Add Location
             </button>
             <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal1">
                 Add Sub Location
-            </button>
+            </button>*@
+            <form id="locationForm" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Select Branch</label>
+                            <select class="form-control select2 selectBranch" style="width:100%">
+                                <option value="null">Please select Branch</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </form>
         </div>
 
     </div>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div id="jstree"></div>
+        </div>
+    </div>
+</div>
+    
 
-    <div id="jstree"></div>
-
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <table class="table table-bordered" id="locationTable">
@@ -41,7 +63,7 @@
                 <tbody></tbody>
             </table>
         </div>
-    </div>
+    </div>*@
 </section>
 
 <!-- Modal Location-->
@@ -116,7 +138,7 @@
                                 <label>Select Location</label>
                                 <select class="form-control select2 selectLocation" style="width:100%">
                                     <option value="null">Please select Location</option>
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -139,90 +161,135 @@
                 </form>
             </div>
 
-            
+
 
         </div>
     </div>
+    
 </div>
+
 
 <script>
     $(document).ready(function () {
 
-        $('#jstree').jstree({
-            "core": {
-                "animation": 0,
-                "check_callback": function (operation, node, node_parent, node_position, more) {
-                    console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more });
-                    //switch (operation) {
-                    //    case "create_node":
-                    //        console.log({ op: operation, no:node, np: node_parent, n_p: node_position, m:more})
-                    //    break;
+        //getTreeData({name: 'Location', data: { bId: 4 }}, function (data) {
+        //    $('#jstree').jstree({
+        //        "core": {
+        //            "animation": 0,
+        //            "check_callback": function (operation, node, node_parent, node_position, more) {
+        //                console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more });
+        //                //switch (operation) {
+        //                //    case "create_node":
+        //                //        console.log({ op: operation, no:node, np: node_parent, n_p: node_position, m:more})
+        //                //    break;
+        //                //    case "rename_node":
+        //                //        console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+        //                //    break;
+        //                //    case "delete_node   ":
+        //                //        console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+        //                //    break;
 
+        //                //}
+        //            },
+        //            "themes": { "stripes": true },
+        //            'data': data
+        //        },
+        //        "types": {
+        //            "#": {
+        //                "max_children": 1,
+        //                "max_depth": 100,
+        //                "valid_children": ["root"]
+        //            },
+        //            "root": {
+        //                "icon": "/static/3.3.10/assets/images/tree_icon.png",
+        //                "valid_children": ["default"]
+        //            },
+        //            "default": {
+        //                "valid_children": ["default", "file"]
+        //            },
+        //            "file": {
+        //                "icon": "glyphicon glyphicon-file",
+        //                "valid_children": []
+        //            }
+        //        },
+        //        "plugins": [
+        //            "contextmenu", "dnd", "search",
+        //            "state", "types", "wholerow"
+        //        ]
+        //    });
+        //});
+        
 
-                    //}
-                },
-                "themes": { "stripes": true },
-                'data': [
-                    { "id": "ajson1", "parent": "#", "text": "Simple root node" },
-                    { "id": "ajson2", "parent": "#", "text": "Root node 2" },
-                    { "id": "ajson3", "parent": "ajson2", "text": "Child 1" },
-                    { "id": "ajson4", "parent": "ajson2", "text": "Child 2" },
-                ]
-            },
-            "types": {
-                "#": {
-                    "max_children": 1,
-                    "max_depth": 100,
-                    "valid_children": ["root"]
-                },
-                "root": {
-                    "icon": "/static/3.3.10/assets/images/tree_icon.png",
-                    "valid_children": ["default"]
-                },
-                "default": {
-                    "valid_children": ["default", "file"]
-                },
-                "file": {
-                    "icon": "glyphicon glyphicon-file",
-                    "valid_children": []
-                }
-            },
-            "plugins": [
-                "contextmenu", "dnd", "search",
-                "state", "types", "wholerow"
-            ]
-        });
-
-        getData({ name: 'Location', data: null });
+        //getData({ name: 'Location', data: null });
 
         populateSelectBox({ filterName: 'Branch', filterSelector: 'selectBranch', data: null });
 
         $('.selectBranch').on('select2:select', function (e) {
-            var data = e.params.data;
-            var requestData = {
-                filterName: 'Location',
-                filterSelector: 'selectLocation',
-                data: {
-                    Id: 0,
-                    bId: data.id
-                }
-            };
+            var branch = e.params.data;
+            getTreeData({ name: 'Location', data: { bId: branch.id } }, function (data) {
+             var tree = $('#jstree').jstree({
+                    "core": {
+                        "animation": 0,
+                        "check_callback": function (operation, node, node_parent, node_position, more) {
+                            operation === "rename_node" ? addData({
+                                name: 'Location', data: {
+                                    Parent_ID: node.parent,
+                                    Branch_ID: branch.id,
+                                    Location_Name: node_position
+                                }
+                            }, function (data) {
+                                console.log(data);
 
-            populateSelectBox(requestData);
+                                tree.jstree('set_id', [node, data]);
+                                //getTreeData({ name: 'Location', data: { bId: branch.id } }, function () {
+                                //    console.log("Tree reloaded");
+                                //    tree.jstree("redraw");
+                                //});
+                            })
+                                : console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+                        },
+                        "themes": { "stripes": true },
+                        'data': data
+                    },
+                    "types": {
+                        "#": {
+                            "max_children": 1,
+                            "max_depth": 100,
+                            "valid_children": ["root"]
+                        },
+                        "root": {
+                            "icon": "/static/3.3.10/assets/images/tree_icon.png",
+                            "valid_children": ["default"]
+                        },
+                        "default": {
+                            "valid_children": ["default", "file"]
+                        },
+                        "file": {
+                            "icon": "glyphicon glyphicon-file",
+                            "valid_children": []
+                        }
+                    },
+                    "plugins": [
+                        "contextmenu", "dnd", "search",
+                        "state", "types", "wholerow"
+                    ]
+                });
+            });
+            //};
         });
 
-        function addLocation(parentID, branchId, locationName) {
+        //function addLocation(parentID, branchId, locationName) {
 
-            console.log(parentID, branchId, locationName);
-            //var locationData = {
-            //    Branch_ID: branchId,
-            //    Parent_ID: parentID,
-            //    Location_Name: locationName
-            //};
-            //addData(locationData, function (data) {
-            //    console.log(data);
-            //});
-        }
+        //    console.log(parentID, branchId, locationName);
+        //    var locationData = {
+        //        Branch_ID: branchId,
+        //        Parent_ID: parentID,
+        //        Location_Name: locationName
+        //    };
+        //    addData(locationData, function (data) {
+        //        console.log(data);
+        //    });
+        //}
 
 
         $('#btnaddLoc').off().click(function (event) {

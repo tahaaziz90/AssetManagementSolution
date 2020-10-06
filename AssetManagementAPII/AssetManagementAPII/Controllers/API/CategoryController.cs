@@ -11,6 +11,36 @@ namespace AssetManagementAPII.Controllers.API
 {
     public class CategoryController : ApiController
     {
+
+        [HttpGet]
+        public IEnumerable<TreeData> getCategoryTree(int bId)
+        {
+            using (AssetManagementEntities entities = new AssetManagementEntities())
+            {
+                List<TreeData> categoryFilter = new List<TreeData>();
+                try
+                {
+                    var catagories = entities.asm_getCategoryTree(bId);
+                    foreach (var cat in catagories)
+                    {
+                        categoryFilter.Add(new TreeData
+                        {
+                            id = cat.id,
+                            text = cat.text,
+                            parent = cat.parent
+                        });
+                    }
+                    return categoryFilter;
+                }
+                catch (Exception e)
+                {
+
+                }
+                return categoryFilter;
+            }
+
+        }
+
         [HttpGet]
         public IEnumerable<categoryModel> getCategorydata(string categoryCode)
         {

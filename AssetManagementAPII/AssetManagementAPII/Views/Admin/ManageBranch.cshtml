@@ -15,8 +15,22 @@
                 Add Branch
             </button>
         </div>
-        
+
+
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>
+                    Company
+                </label>
+                <select class="form-control select2 selectCID">
+                    <option value="null">Please select Company</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div id="jstree"></div>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
@@ -32,9 +46,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -196,8 +208,68 @@
 <script>
     $(document).ready(function () {
         getData({ name: 'Branch', data: null });
-        populateSelectBox({ filterName: 'Country', filterSelector: 'selectCountry', data: null });
+        
         populateSelectBox({ filterName: 'Company', filterSelector: 'selectCID', data: null });
+        
+        $('.selectCID').on('select2:select', function (e) {
+            var data = e.params.data;
+            //var requestData = {
+            //    filterName: 'Location',
+            //    filterSelector: 'selectLocation',
+            //    data: {
+            //        Id: 0,
+            //        bId: data.id
+            //    }
+            getTreeData({ name: 'Branch', data: { companyId: 2 } }, function (data) {
+                $('#jstree').jstree({
+                    "core": {
+                        "animation": 0,
+                        "check_callback": function (operation, node, node_parent, node_position, more) {
+                            console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more });
+                            //switch (operation) {
+                            //    case "create_node":
+                            //        console.log({ op: operation, no:node, np: node_parent, n_p: node_position, m:more})
+                            //    break;
+                            //    case "rename_node":
+                            //        console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+                            //    break;
+                            //    case "delete_node   ":
+                            //        console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+                            //    break;
+
+                            //}
+                        },
+                        "themes": { "stripes": true },
+                        'data': data
+                    },
+                    "types": {
+                        "#": {
+                            "max_children": 1,
+                            "max_depth": 100,
+                            "valid_children": ["root"]
+                        },
+                        "root": {
+                            "icon": "/static/3.3.10/assets/images/tree_icon.png",
+                            "valid_children": ["default"]
+                        },
+                        "default": {
+                            "valid_children": ["default", "file"]
+                        },
+                        "file": {
+                            "icon": "glyphicon glyphicon-file",
+                            "valid_children": []
+                        }
+                    },
+                    "plugins": [
+                        "contextmenu", "dnd", "search",
+                        "state", "types", "wholerow"
+                    ]
+                });
+            });
+            //};
+
+            populateSelectBox(requestData);
+        });
 
 
     });

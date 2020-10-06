@@ -17,9 +17,22 @@
             <button type="button" class="btn btn-primary pull-right" style="margin:10px" data-toggle="modal" data-target="#exampleModal1">
                 Add Sub Category
             </button>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Select Branch</label>
+                        <select class="form-control select2 selectBranch" style="width:100%">
+                            <option value="null">Please select branch</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <div id="jstree"></div>
 
     <div class="row">
         <div class="col-md-1"></div>
@@ -34,9 +47,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -153,14 +164,60 @@
 
         $('.selectBranch').on('select2:select', function (e) {
             var data = e.params.data;
-            var requestData = {
-                filterName: 'Category',
-                filterSelector: 'selectCategory',
-                data: {
-                    Id: 0,
-                    bId: data.id
-                }
-            };
+            //var requestData = {
+            //    filterName: 'Location',
+            //    filterSelector: 'selectLocation',
+            //    data: {
+            //        Id: 0,
+            //        bId: data.id
+            //    }
+            getTreeData({ name: 'Category', data: { bId: 4 } }, function (data) {
+                $('#jstree').jstree({
+                    "core": {
+                        "animation": 0,
+                        "check_callback": function (operation, node, node_parent, node_position, more) {
+                            console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more });
+                            //switch (operation) {
+                            //    case "create_node":
+                            //        console.log({ op: operation, no:node, np: node_parent, n_p: node_position, m:more})
+                            //    break;
+                            //    case "rename_node":
+                            //        console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+                            //    break;
+                            //    case "delete_node   ":
+                            //        console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+                            //    break;
+
+                            //}
+                        },
+                        "themes": { "stripes": true },
+                        'data': data
+                    },
+                    "types": {
+                        "#": {
+                            "max_children": 1,
+                            "max_depth": 100,
+                            "valid_children": ["root"]
+                        },
+                        "root": {
+                            "icon": "/static/3.3.10/assets/images/tree_icon.png",
+                            "valid_children": ["default"]
+                        },
+                        "default": {
+                            "valid_children": ["default", "file"]
+                        },
+                        "file": {
+                            "icon": "glyphicon glyphicon-file",
+                            "valid_children": []
+                        }
+                    },
+                    "plugins": [
+                        "contextmenu", "dnd", "search",
+                        "state", "types", "wholerow"
+                    ]
+                });
+            });
+            //};
 
             populateSelectBox(requestData);
         });

@@ -19,6 +19,8 @@ namespace AssetManagementAPII.Controllers.API
         //    }
         //}
 
+
+
         [HttpGet]
         public IEnumerable<Filter> getLocationList(int Id, int bId)
         {
@@ -34,6 +36,35 @@ namespace AssetManagementAPII.Controllers.API
                         {
                             id = loc.Id,
                             text = loc.Name
+                        });
+                    }
+                    return locationFilter;
+                }
+                catch (Exception e)
+                {
+
+                }
+                return locationFilter;
+            }
+
+        }
+
+        [HttpGet]
+        public IEnumerable<TreeData> getLocationTree(int bId)
+        {
+            using (AssetManagementEntities entities = new AssetManagementEntities())
+            {
+                List<TreeData> locationFilter = new List<TreeData>();
+                try
+                {
+                    var locations = entities.asm_getLocationTree(bId);
+                    foreach (var loc in locations)
+                    {
+                        locationFilter.Add(new TreeData
+                        {
+                            id = loc.id,
+                            text = loc.text,
+                            parent = loc.parent
                         });
                     }
                     return locationFilter;
@@ -85,11 +116,26 @@ namespace AssetManagementAPII.Controllers.API
         }
 
         [HttpPost]
-        public void AddLocation(LocationAdditionModel locat)
+        public int AddLocation(LocationAdditionModel addLocation)
         {
+            List<returnID> newID = new List<returnID>();
+            int ParentID = Convert.ToInt16(addLocation.Parent_ID);
+            int BranchID = Convert.ToInt16(addLocation.Branch_ID);
             using (AssetManagementEntities entities = new AssetManagementEntities())
             {
-                //entities.asm_addLocation()
+                var inserted = entities.asm_addLocation(
+                    addLocation.Location_Name,
+                   ParentID,
+                   BranchID
+                    );
+                foreach(var id in inserted)
+                {
+                    newID.Add(new returnID
+                    {
+                        Id = id.Id
+                    });
+                }
+                return newID.FirstOrDefault().Id;
             }
         }
 

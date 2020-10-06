@@ -290,7 +290,13 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="UserAuthentication" FunctionName="AssetManagementModel.Store.UserAuthentication" />
-    <FunctionImportMapping FunctionImportName="asm_addLocation" FunctionName="AssetManagementModel.Store.asm_addLocation" />
+    <FunctionImportMapping FunctionImportName="asm_addLocation" FunctionName="AssetManagementModel.Store.asm_addLocation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_addLocation_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="asm_addAsset" FunctionName="AssetManagementModel.Store.asm_addAsset" />
     <FunctionImportMapping FunctionImportName="asm_addCategory" FunctionName="AssetManagementModel.Store.asm_addCategory" />
     <FunctionImportMapping FunctionImportName="asm_addCurrecy" FunctionName="AssetManagementModel.Store.asm_addCurrecy" />
@@ -495,6 +501,33 @@
         <ComplexTypeMapping TypeName="AssetManagementModel.asm_getBranch_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getLocationTree" FunctionName="AssetManagementModel.Store.asm_getLocationTree">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getLocationTree_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getCategoryTree" FunctionName="AssetManagementModel.Store.asm_getCategoryTree">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getCategoryTree_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_getBranchTree" FunctionName="AssetManagementModel.Store.asm_getBranchTree">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetManagementModel.asm_getBranchTree_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -615,6 +615,8 @@
   </Function>
   <Function Name="asm_addLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ParentID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
   </Function>
   <Function Name="asm_addRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iD" Type="int" Mode="In" />
@@ -702,12 +704,18 @@
   <Function Name="asm_getBranchdata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BranchCode" Type="int" Mode="In" />
   </Function>
+  <Function Name="asm_getBranchTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="companyId" Type="int" Mode="In" />
+  </Function>
   <Function Name="asm_getCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="parentId" Type="int" Mode="In" />
     <Parameter Name="branchId" Type="int" Mode="In" />
   </Function>
   <Function Name="asm_getCategorydata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CategoryCode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asm_getCategoryTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="branchId" Type="int" Mode="In" />
   </Function>
   <Function Name="asm_getCompany" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="companyId" Type="int" Mode="In" />
@@ -723,6 +731,9 @@
   </Function>
   <Function Name="asm_getLocations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="parentId" Type="int" Mode="In" />
+    <Parameter Name="branchId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asm_getLocationTree" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="branchId" Type="int" Mode="In" />
   </Function>
   <Function Name="asm_getUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
