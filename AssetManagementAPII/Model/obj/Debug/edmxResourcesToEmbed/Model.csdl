@@ -688,8 +688,6 @@
     </FunctionImport>
     <FunctionImport Name="asm_deleteCategory">
       <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
-      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
       <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="asm_deleteCurrency">
@@ -697,9 +695,6 @@
     </FunctionImport>
     <FunctionImport Name="asm_deleteLocation">
       <Parameter Name="LocationCode" Mode="In" Type="Int32" />
-      <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
-      <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
-      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
     </FunctionImport>
     <FunctionImport Name="asm_deleteRole">
       <Parameter Name="iD" Mode="In" Type="Int32" />
@@ -899,6 +894,10 @@
     <FunctionImport Name="asm_getBranchTree" ReturnType="Collection(AssetManagementModel.asm_getBranchTree_Result)">
       <Parameter Name="companyId" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="asm_deleteBranch">
+      <Parameter Name="branchId" Mode="In" Type="Int32" />
+      <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="asm_getCategory_Result">
     <Property Type="Int32" Name="Id" Nullable="false" />
@@ -972,6 +971,7 @@
     <Property Name="isDeleted" Type="Boolean" />
     <NavigationProperty Name="Categories" Relationship="AssetManagementModel.FK_Category_Branch" FromRole="Branch" ToRole="Category" />
     <NavigationProperty Name="Locations" Relationship="AssetManagementModel.FK_Location_Branch" FromRole="Branch" ToRole="Location" />
+    <Property Name="DeletedOn" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="BranchUser">
     <Key>

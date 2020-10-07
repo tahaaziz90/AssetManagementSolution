@@ -40,6 +40,20 @@ function addData(entity, callback) {
 
 }
 
+function deleteData(entity, callback) {
+
+    var request = {
+        url: baseUrl.concat(api[entity.name].delete.url),
+        method: api[entity.name].delete.method,
+        data: entity.data
+    }
+
+    ajaxCall(request, function (data) {
+        return callback(data);
+    });
+
+}
+
 function getFilter(entity, callback) {
 
     var request = {

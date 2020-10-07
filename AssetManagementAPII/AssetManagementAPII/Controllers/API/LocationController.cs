@@ -19,6 +19,12 @@ namespace AssetManagementAPII.Controllers.API
         //    }
         //}
 
+        [HttpGet]
+        public void DeleteLocation(int Id) {
+            using (AssetManagementEntities entities = new AssetManagementEntities()) {
+                var deleted = entities.asm_deleteLocation(Id);
+            }
+        }
 
 
         [HttpGet]

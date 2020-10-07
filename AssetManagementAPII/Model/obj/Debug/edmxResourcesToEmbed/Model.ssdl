@@ -50,6 +50,7 @@
     <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedOn" Type="datetime" />
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DeletedOn" Type="datetime" />
     <Property Name="isDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="BranchUser">
@@ -657,10 +658,12 @@
     <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
     <Parameter Name="isDeleted" Type="bit" Mode="In" />
   </Function>
+  <Function Name="asm_deleteBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="branchId" Type="int" Mode="In" />
+    <Parameter Name="isDeleted" Type="bit" Mode="In" />
+  </Function>
   <Function Name="asm_deleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CategoryCode" Type="int" Mode="In" />
-    <Parameter Name="ModifiedOn" Type="datetime" Mode="In" />
-    <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
     <Parameter Name="isDeleted" Type="bit" Mode="In" />
   </Function>
   <Function Name="asm_deleteCurrency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -668,9 +671,6 @@
   </Function>
   <Function Name="asm_deleteLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="LocationCode" Type="int" Mode="In" />
-    <Parameter Name="ModifiedOn" Type="datetime" Mode="In" />
-    <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
-    <Parameter Name="isDeleted" Type="bit" Mode="In" />
   </Function>
   <Function Name="asm_deleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="iD" Type="int" Mode="In" />

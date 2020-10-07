@@ -9,4 +9,3 @@ C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Model\obj\Debug\Model.csproj
 C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Model\obj\Debug\Model.csproj.CopyComplete
 C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Model\obj\Debug\Model.dll
 C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Model\obj\Debug\Model.pdb
-C:\Users\Taha Aziz\source\repos\AssetManagementAPII\Model\obj\Debug\Model.csprojAssemblyReference.cache

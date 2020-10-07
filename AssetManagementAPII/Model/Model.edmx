@@ -55,6 +55,7 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedOn" Type="datetime" />
           <Property Name="isDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="BranchUser">
@@ -662,10 +663,12 @@
           <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
           <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
+        <Function Name="asm_deleteBranch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="branchId" Type="int" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+        </Function>
         <Function Name="asm_deleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CategoryCode" Type="int" Mode="In" />
-          <Parameter Name="ModifiedOn" Type="datetime" Mode="In" />
-          <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
           <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
         <Function Name="asm_deleteCurrency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -673,9 +676,6 @@
         </Function>
         <Function Name="asm_deleteLocation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationCode" Type="int" Mode="In" />
-          <Parameter Name="ModifiedOn" Type="datetime" Mode="In" />
-          <Parameter Name="DeletedOn" Type="datetime" Mode="In" />
-          <Parameter Name="isDeleted" Type="bit" Mode="In" />
         </Function>
         <Function Name="asm_deleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="iD" Type="int" Mode="In" />
@@ -1698,8 +1698,6 @@
           </FunctionImport>
           <FunctionImport Name="asm_deleteCategory">
             <Parameter Name="CategoryCode" Mode="In" Type="Int32" />
-            <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
-            <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
             <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="asm_deleteCurrency">
@@ -1707,9 +1705,6 @@
           </FunctionImport>
           <FunctionImport Name="asm_deleteLocation">
             <Parameter Name="LocationCode" Mode="In" Type="Int32" />
-            <Parameter Name="ModifiedOn" Mode="In" Type="DateTime" />
-            <Parameter Name="DeletedOn" Mode="In" Type="DateTime" />
-            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="asm_deleteRole">
             <Parameter Name="iD" Mode="In" Type="Int32" />
@@ -1909,6 +1904,10 @@
           <FunctionImport Name="asm_getBranchTree" ReturnType="Collection(AssetManagementModel.asm_getBranchTree_Result)">
           <Parameter Name="companyId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="asm_deleteBranch">
+            <Parameter Name="branchId" Mode="In" Type="Int32" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="asm_getCategory_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1982,6 +1981,7 @@
           <Property Name="isDeleted" Type="Boolean" />
           <NavigationProperty Name="Categories" Relationship="AssetManagementModel.FK_Category_Branch" FromRole="Branch" ToRole="Category" />
           <NavigationProperty Name="Locations" Relationship="AssetManagementModel.FK_Location_Branch" FromRole="Branch" ToRole="Location" />
+          <Property Name="DeletedOn" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="BranchUser">
           <Key>
@@ -2576,6 +2576,7 @@
           <EntitySetMapping Name="Branches">
             <EntityTypeMapping TypeName="AssetManagementModel.Branch">
               <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -2777,6 +2778,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="asm_deleteBranch" FunctionName="AssetManagementModel.Store.asm_deleteBranch" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

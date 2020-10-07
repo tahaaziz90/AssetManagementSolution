@@ -45,6 +45,7 @@ namespace Model
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<bool> isDeleted { get; set; }
+        public Nullable<System.DateTime> DeletedOn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asset> Assets { get; set; }

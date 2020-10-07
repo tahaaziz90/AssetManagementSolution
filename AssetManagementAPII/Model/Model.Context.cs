@@ -429,25 +429,17 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteAsset", iDParameter, modifiedOnParameter, deletedOnParameter, isDeletedParameter);
         }
     
-        public virtual int asm_deleteCategory(Nullable<int> categoryCode, Nullable<System.DateTime> modifiedOn, Nullable<System.DateTime> deletedOn, Nullable<bool> isDeleted)
+        public virtual int asm_deleteCategory(Nullable<int> categoryCode, Nullable<bool> isDeleted)
         {
             var categoryCodeParameter = categoryCode.HasValue ?
                 new ObjectParameter("CategoryCode", categoryCode) :
                 new ObjectParameter("CategoryCode", typeof(int));
     
-            var modifiedOnParameter = modifiedOn.HasValue ?
-                new ObjectParameter("ModifiedOn", modifiedOn) :
-                new ObjectParameter("ModifiedOn", typeof(System.DateTime));
-    
-            var deletedOnParameter = deletedOn.HasValue ?
-                new ObjectParameter("DeletedOn", deletedOn) :
-                new ObjectParameter("DeletedOn", typeof(System.DateTime));
-    
             var isDeletedParameter = isDeleted.HasValue ?
                 new ObjectParameter("isDeleted", isDeleted) :
                 new ObjectParameter("isDeleted", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteCategory", categoryCodeParameter, modifiedOnParameter, deletedOnParameter, isDeletedParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteCategory", categoryCodeParameter, isDeletedParameter);
         }
     
         public virtual int asm_deleteCurrency(Nullable<int> iD)
@@ -459,25 +451,13 @@ namespace Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteCurrency", iDParameter);
         }
     
-        public virtual int asm_deleteLocation(Nullable<int> locationCode, Nullable<System.DateTime> modifiedOn, Nullable<System.DateTime> deletedOn, Nullable<bool> isDeleted)
+        public virtual int asm_deleteLocation(Nullable<int> locationCode)
         {
             var locationCodeParameter = locationCode.HasValue ?
                 new ObjectParameter("LocationCode", locationCode) :
                 new ObjectParameter("LocationCode", typeof(int));
     
-            var modifiedOnParameter = modifiedOn.HasValue ?
-                new ObjectParameter("ModifiedOn", modifiedOn) :
-                new ObjectParameter("ModifiedOn", typeof(System.DateTime));
-    
-            var deletedOnParameter = deletedOn.HasValue ?
-                new ObjectParameter("DeletedOn", deletedOn) :
-                new ObjectParameter("DeletedOn", typeof(System.DateTime));
-    
-            var isDeletedParameter = isDeleted.HasValue ?
-                new ObjectParameter("isDeleted", isDeleted) :
-                new ObjectParameter("isDeleted", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteLocation", locationCodeParameter, modifiedOnParameter, deletedOnParameter, isDeletedParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteLocation", locationCodeParameter);
         }
     
         public virtual int asm_deleteRole(Nullable<int> iD, Nullable<System.DateTime> modifiedOn, Nullable<bool> isDeleted)
@@ -1028,6 +1008,19 @@ namespace Model
                 new ObjectParameter("companyId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<asm_getBranchTree_Result>("asm_getBranchTree", companyIdParameter);
+        }
+    
+        public virtual int asm_deleteBranch(Nullable<int> branchId, Nullable<bool> isDeleted)
+        {
+            var branchIdParameter = branchId.HasValue ?
+                new ObjectParameter("branchId", branchId) :
+                new ObjectParameter("branchId", typeof(int));
+    
+            var isDeletedParameter = isDeleted.HasValue ?
+                new ObjectParameter("isDeleted", isDeleted) :
+                new ObjectParameter("isDeleted", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("asm_deleteBranch", branchIdParameter, isDeletedParameter);
         }
     }
 }

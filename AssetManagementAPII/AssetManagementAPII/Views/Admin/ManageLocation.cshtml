@@ -231,22 +231,26 @@
                     "core": {
                         "animation": 0,
                         "check_callback": function (operation, node, node_parent, node_position, more) {
-                            operation === "rename_node" ? addData({
-                                name: 'Location', data: {
-                                    Parent_ID: node.parent,
-                                    Branch_ID: branch.id,
-                                    Location_Name: node_position
-                                }
-                            }, function (data) {
-                                console.log(data);
+                            console.log([operation, node, node_parent, node_position, more]);
 
-                                tree.jstree('set_id', [node, data]);
-                                //getTreeData({ name: 'Location', data: { bId: branch.id } }, function () {
-                                //    console.log("Tree reloaded");
-                                //    tree.jstree("redraw");
-                                //});
-                            })
-                                : console.log({ op: operation, no: node, np: node_parent, n_p: node_position, m: more })
+                            switch (operation) {
+                                case "rename_node":
+                                    addData({
+                                        name: 'Location', data: {
+                                            Parent_ID: node.parent,
+                                            Branch_ID: branch.id,
+                                            Location_Name: node_position
+                                        }
+                                    }, function (data) {
+                                        $('#jstree').jstree(true).set_id(node, data);
+                                    })
+                                    break;
+                                case "delete_node":
+                                    deleteData({ name: 'Location', data: { Id: parseInt(node.id) } }, function (data) {
+                                        console.log(data);
+                                    });
+                                    break;
+                            }
                         },
                         "themes": { "stripes": true },
                         'data': data
@@ -272,7 +276,7 @@
                     "plugins": [
                         "contextmenu", "dnd", "search",
                         "state", "types", "wholerow"
-                    ]
+                 ]
                 });
             });
             //};

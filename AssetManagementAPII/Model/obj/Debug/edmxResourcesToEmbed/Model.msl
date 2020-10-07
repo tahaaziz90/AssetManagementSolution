@@ -330,6 +330,7 @@
     <EntitySetMapping Name="Branches">
       <EntityTypeMapping TypeName="AssetManagementModel.Branch">
         <MappingFragment StoreEntitySet="Branch">
+          <ScalarProperty Name="DeletedOn" ColumnName="DeletedOn" />
           <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -531,5 +532,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asm_deleteBranch" FunctionName="AssetManagementModel.Store.asm_deleteBranch" />
   </EntityContainerMapping>
 </Mapping>

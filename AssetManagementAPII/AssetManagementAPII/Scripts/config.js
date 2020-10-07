@@ -31,12 +31,15 @@ var api = {
             url: '/api/Location/getLocationList',
             method: 'GET'
         },
-        update: '',
-        delete: '',
+        delete: {
+            url: '/api/Location/DeleteLocation',
+            mehtod: 'GET',
+        },
         tree: {
             url: '/api/Location/getLocationTree',
             mehtod: 'GET',
-        }
+        },
+        update: '',
     },
     Category: {
         get: {
